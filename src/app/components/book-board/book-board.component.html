@@ -1,0 +1,21 @@
+<div class="p-grid m-grid">
+  <div *ngFor="book of bookList" class="p-col-3">
+    <div class="card-wrapper">
+      <p-card header="{{book.label}}" styleClass="ui-card-shadow">
+        <p-header>
+          <div class="ctr-img">
+            <div *ngIf="book.src; else draw_{{i}}">
+                <img class="mx-sz" src="{{book.src}}">
+            </div>
+            <ng-template #draw_{{i}}>
+                <img class="mx-sz poster" src="{{book.src}}">
+            </ng-template>
+          </div>
+        </p-header>
+      </p-card>
+      <div class="overlay">
+        <button class="go-to-watch-btn">Перейти к просмотру</button>     
+      </div>
+    </div>
+  </div>
+</div>

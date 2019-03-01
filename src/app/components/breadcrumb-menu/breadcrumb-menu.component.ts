@@ -15,7 +15,7 @@ export class BreadcrumbMenuComponent implements OnInit {
   home: MenuItem;
 
   ngOnInit() {
-    this.home = {icon: 'pi pi-home'};
+    this.home = {label: 'Main', icon: 'pi pi-home', url: 'board'};
   }
 
 }
