@@ -1,20 +1,26 @@
+<p-button (click)="onClickAddBook()" class="add-book-button" icon="pi pi-plus" iconPos="left" label="Добавить книгу"></p-button>
 <div class="p-grid m-grid">
-  <div *ngFor="book of bookList" class="p-col-3">
+  <div *ngFor="let book of bookList" class="p-col-3">
     <div class="card-wrapper">
       <p-card header="{{book.label}}" styleClass="ui-card-shadow">
         <p-header>
           <div class="ctr-img">
-            <div *ngIf="book.src; else draw_{{i}}">
-                <img class="mx-sz" src="{{book.src}}">
+            <div *ngIf="book.poster; else emptyPoster">
+                <img class="poster" src="{{book.poster}}">
             </div>
-            <ng-template #draw_{{i}}>
-                <img class="mx-sz poster" src="{{book.src}}">
+            <ng-template class="empty-poster" #emptyPoster>
+                <div class="empty-poster">
+                    <span>Нет фото</span>
+                </div>
             </ng-template>
+          </div>
+          <div class="rating-wrapper">
+            <p-rating [(ngModel)]="book.rating" [cancel]="false"></p-rating>         
           </div>
         </p-header>
       </p-card>
       <div class="overlay">
-        <button class="go-to-watch-btn">Перейти к просмотру</button>     
+        <button (click)="onClickBook(book.id)" class="go-to-watch-btn">Перейти к просмотру</button>     
       </div>
     </div>
   </div>

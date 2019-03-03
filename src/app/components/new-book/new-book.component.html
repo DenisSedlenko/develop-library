@@ -1,3 +1,7 @@
-<p>
-  new-book works!
-</p>
+<app-edit-book
+    [isCreation]="true"
+    [labelButton]="labelButton"
+    [header]="headerPanel"
+    [message]="messageOnSuccessAddition"
+    (onCompletedAddBook)="onCompletedAddBook($event)">
+</app-edit-book>

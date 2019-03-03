@@ -1,3 +1,15 @@
-<p>
-  book-detail works!
-</p>
+<div style="position: relative;">
+  <div class="p-grid switch-editing">
+      <div class="p-col-8"></div>
+      <span>Режим редактирования:</span>
+      <p-inputSwitch [(ngModel)]="!isDisabledForChange"></p-inputSwitch>
+  </div>
+
+  <app-edit-book
+    [labelButton]="labelButton"
+    [header]="headerPanel"
+    [message]="messageOnSuccessChange"
+    [editableBook]="detailBook"
+    [isDisabled]="isDisabledForChange">
+  </app-edit-book>    
+</div>

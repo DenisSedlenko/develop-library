@@ -1,0 +1,127 @@
+<p-toast [style]="{marginTop: '80px'}"></p-toast>
+<div class="edit-container">
+  <div class="p-grid">
+    <div class="p-col-3">
+      <div class="poster-wrapper">
+        <div *ngIf="book.poster; else emptyPoster">
+          <img class="poster" src="{{book.poster}}">
+        </div>
+        <ng-template #emptyPoster>
+          <div class="empty-poster">
+            <span>Нет фото</span>
+            <label for="fileToUpload"><i class="pi pi-plus-circle"></i></label>              
+            <input (click)="onUploadImage($event)" id="fileToUpload" type="file" style="display:none;">
+          </div>
+        </ng-template>
+        <div class="rating-wrapper">
+          <p-rating [(ngModel)]="book.rating" (onRate)="handleRate($event)" [cancel]="false"></p-rating>         
+        </div>
+      </div>
+    </div>
+    <div class="p-col-9">
+      <div class="edit-wrapper">
+        <form [formGroup]="bookform" (ngSubmit)="onSubmit(bookform.value)">
+            <p-panel header="{{header}}">
+                <div class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid" style="margin: 10px 0px">
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3" style="color: red">
+                            Название книги *:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input pInputText type="text" [(ngModel)]="book.label" formControlName="label" placeholder="Required"/>
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <p-message severity="error" text="Название книги обязательное поле" *ngIf="!bookform.controls['label'].valid&&bookform.controls['label'].dirty"></p-message>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3" style="color: red">
+                            Автор *:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input pInputText type="text" [(ngModel)]="book.author" formControlName="author" placeholder="Required"/>
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <p-message severity="error" text="Автор обязательное поле" *ngIf="!bookform.controls['author'].valid&&bookform.controls['author'].dirty"></p-message>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3" style="color: red">
+                            Описание *:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input pInputTextarea type="text" [(ngModel)]="book.description" formControlName="description" placeholder="Required"/>
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <p-message severity="error" text="Описание обязательное поле" 
+                            *ngIf="!bookform.controls['description'].valid&&bookform.controls['description'].dirty"></p-message>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3" style="color: red">
+                            Издательство *:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input pInputText type="text" [(ngModel)]="book.publishing" formControlName="publishing" placeholder="Required"/>
+                        </div>
+                        <div class="ui-grid-col-4">
+                        <p-message severity="error" text="Издательство обязательное поле" 
+                                *ngIf="!bookform.controls['publishing'].valid&&bookform.controls['publishing'].dirty"></p-message>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3" style="color: red">
+                            Код ISBN *:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <p-inputMask mask="9-999-99999-9" [(ngModel)]="book.isbn" formControlName="isbn" placeholder="Required"></p-inputMask>
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <p-message severity="error" text="Код ISBN обязательное поле" 
+                            *ngIf="!bookform.controls['isbn'].valid&&bookform.controls['isbn'].dirty"></p-message>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3" style="color: red">
+                            Год издания *:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input pInputText type="number" [(ngModel)]="book.datePublishing" formControlName="datePublishing" placeholder="Required"/>
+                        </div>
+                        <div class="ui-grid-col-4">
+                            <p-message severity="error" text="Год издания обязательное поле" 
+                            *ngIf="!bookform.controls['datePublishing'].valid&&bookform.controls['datePublishing'].dirty"></p-message>
+                        </div>
+                    </div>
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3">
+                            Количество страниц:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input pInputText type="number" [(ngModel)]="book.count" formControlName="countPage"/>
+                        </div>
+                        <div class="ui-grid-col-4"></div>
+                    </div> 
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3">
+                            Личные заметки:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input pInputText type="text" [(ngModel)]="book.note" formControlName="note"/>
+                        </div>
+                        <div class="ui-grid-col-4"></div>
+                    </div>                                                           
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3"></div>
+                        <div class="ui-grid-col-6">
+                            <button pButton type="submit" label="{{labelButton}}" [disabled]="!bookform.valid"></button>
+                        </div>
+                        <div class="ui-grid-col-4"></div>
+                    </div>
+                </div>
+            </p-panel>
+        </form>
+      </div>
+    </div>
+  </div>
+</div> 

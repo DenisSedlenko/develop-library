@@ -1,0 +1,35 @@
+.edit-container {
+  margin: auto;
+  width: 70%;
+  margin-top: 2em;
+}
+
+.edit-container .poster-wrapper .poster {
+  height: 400px;
+  text-align: center;
+}
+
+.edit-container .poster-wrapper .empty-poster .pi {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  font-size: 5em; 
+  text-align: center;
+  margin-top: -0.5em;
+  margin-left: -0.5em;
+}
+
+.edit-container .poster-wrapper .empty-poster:hover {
+  background-color: rgba(0,0,0,0.5);
+}
+
+.edit-container .poster-wrapper .empty-poster:hover .pi{
+  display: block;
+}
+
+.edit-container .rating-wrapper {
+  padding-top: 1em;
+  text-align: center;
+}
