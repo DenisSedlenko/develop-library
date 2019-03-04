@@ -4,17 +4,22 @@
     <div class="p-col-3">
       <div class="poster-wrapper">
         <div *ngIf="book.poster; else emptyPoster">
-          <img class="poster" src="{{book.poster}}">
+            <div class="cur-poster">
+                <img class="poster" src="{{book.poster}}">
+                <label for="fileToUpload"><i class="pi pi-plus-circle"></i></label> 
+                <input (change)="onUploadImage($event)" id="fileToUpload" type="file" style="display:none;">
+                <div class="overlay"></div>
+            </div> 
         </div>
         <ng-template #emptyPoster>
           <div class="empty-poster">
             <span>Нет фото</span>
             <label for="fileToUpload"><i class="pi pi-plus-circle"></i></label>              
-            <input (click)="onUploadImage($event)" id="fileToUpload" type="file" style="display:none;">
+            <input (change)="onUploadImage($event)" id="fileToUpload" type="file" style="display:none;">
           </div>
         </ng-template>
         <div class="rating-wrapper">
-          <p-rating [(ngModel)]="book.rating" (onRate)="handleRate($event)" [cancel]="false"></p-rating>         
+          <p-rating [(ngModel)]="book.rating" disabled="{{isDisabled}}" (onRate)="handleRate($event)" [cancel]="false"></p-rating>         
         </div>
       </div>
     </div>
@@ -110,7 +115,16 @@
                             <input pInputText type="text" [(ngModel)]="book.note" formControlName="note"/>
                         </div>
                         <div class="ui-grid-col-4"></div>
-                    </div>                                                           
+                    </div> 
+                    <div class="ui-grid-row">
+                        <div class="ui-grid-col-3">
+                            Комментарий:
+                        </div>
+                        <div class="ui-grid-col-6">
+                            <input pInputTextarea type="text" [(ngModel)]="book.comment" formControlName="comment" />
+                        </div>
+                        <div class="ui-grid-col-4"></div>
+                    </div>                                                          
                     <div class="ui-grid-row">
                         <div class="ui-grid-col-3"></div>
                         <div class="ui-grid-col-6">

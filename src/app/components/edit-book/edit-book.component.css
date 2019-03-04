@@ -9,7 +9,8 @@
   text-align: center;
 }
 
-.edit-container .poster-wrapper .empty-poster .pi {
+.edit-container .poster-wrapper .empty-poster .pi
+.edit-container .poster-wrapper .cur-poster .pi {
   display: none;
   position: absolute;
   top: 50%;
@@ -25,7 +26,26 @@
   background-color: rgba(0,0,0,0.5);
 }
 
-.edit-container .poster-wrapper .empty-poster:hover .pi{
+.edit-container .poster-wrapper .cur-poster {
+  position: relative;
+}
+
+.edit-container .poster-wrapper .cur-poster .overlay {
+  position: absolute;
+  top: 0;
+  width: 300px;
+  height: 400px;
+  display: none;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.edit-container .poster-wrapper .cur-poster:hover .overlay {
+  display: block;
+}
+
+.edit-container .poster-wrapper .empty-poster:hover .pi,
+.edit-container .poster-wrapper .cur-poster:hover .pi{
   display: block;
 }
 

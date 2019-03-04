@@ -2,7 +2,7 @@
   <div class="p-grid switch-editing">
       <div class="p-col-8"></div>
       <span>Режим редактирования:</span>
-      <p-inputSwitch [(ngModel)]="!isDisabledForChange"></p-inputSwitch>
+      <p-inputSwitch (onChange)="handleChange($event)" [(ngModel)]="isEditMode"></p-inputSwitch>
   </div>
 
   <app-edit-book
@@ -10,6 +10,7 @@
     [header]="headerPanel"
     [message]="messageOnSuccessChange"
     [editableBook]="detailBook"
-    [isDisabled]="isDisabledForChange">
+    [isDisabled]="isDisabledForChange"
+    (onCompletedChangeBook)="onCompletedChangeBook($event)">
   </app-edit-book>    
 </div>

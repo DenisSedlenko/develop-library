@@ -1,9 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import BookModel from '../../models/book.model';
-import testData from '../../helpers/test-data.helper';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import ModelDataService from 'src/app/services/model-data.service';
+import { ModelDataService } from 'src/app/services/model-data.service';
 
 @Component({
   selector: 'app-book-board',

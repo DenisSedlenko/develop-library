@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import BreadcrumbService from 'src/app/services/breadcrumb.service';
+import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 import { Router } from '@angular/router';
 import BookModel from 'src/app/models/book.model';
-import ModelDataService from 'src/app/services/model-data.service';
+import { ModelDataService } from 'src/app/services/model-data.service';
 
 @Component({
   selector: 'app-new-book',

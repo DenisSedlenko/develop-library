@@ -6,7 +6,7 @@ import testData from '../helpers/test-data.helper';
 @Injectable({
   providedIn: 'root',
 })
-export default class ModelDataService {
+export class ModelDataService {
 
   private books: Array<BookModel> = testData as Array<BookModel>;
   librarySubject$: BehaviorSubject<Array<BookModel>> = new BehaviorSubject<Array<BookModel>>(this.books);

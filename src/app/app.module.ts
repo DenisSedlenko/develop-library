@@ -11,6 +11,9 @@ import { BookDetailComponent } from './components/book-detail/book-detail.compon
 import { NewBookComponent } from './components/new-book/new-book.component';
 import { EditBookComponent } from './components/edit-book/edit-book.component';
 
+import { BreadcrumbService } from './services/breadcrumb.service';
+import { ModelDataService } from './services/model-data.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +30,7 @@ import { EditBookComponent } from './components/edit-book/edit-book.component';
     FormsModule, 
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [BreadcrumbService, ModelDataService],
   bootstrap: [AppComponent]
 })
 

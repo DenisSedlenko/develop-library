@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import BreadcrumbService from 'src/app/services/breadcrumb.service';
-import ModelDataService from 'src/app/services/model-data.service';
+import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
+import { ModelDataService } from 'src/app/services/model-data.service';
 import BookModel from 'src/app/models/book.model';
 
 @Component({
@@ -16,11 +16,11 @@ export class BookDetailComponent implements OnInit, OnDestroy {
   private bookList: Array<BookModel>;
   private detailBook: BookModel;
   private isDisabledForChange = true;
-  private checkedEditing = false;
 
   private activeRouteSubscription: Subscription;
   private booksSubscription: Subscription;
 
+  isEditMode;
   labelButton: string = 'Сохранить изменения';
   headerPanel: string = 'Информация о книге';
   messageOnSuccessChange: string = 'Книга успешно изменена';
@@ -37,7 +37,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
 
     this.booksSubscription = this.modelDataService.librarySubject$.subscribe( books => {
       this.bookList = books;
-      this.detailBook = this.bookList.find(book => book.id === this.id);
+      this.detailBook = { ...this.bookList.find(book => book.id === this.id) };
       this.breadcrumbService.pushItemBreadcrumb({ label: this.detailBook.label, url: `detail/${this.id}`});
     })
   }
@@ -46,4 +46,13 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     this.activeRouteSubscription.unsubscribe();
     this.booksSubscription.unsubscribe();
   }
+
+  onCompletedChangeBook(book) {
+    this.modelDataService.updateBook(book);
+    this.isDisabledForChange = true;
+  }
+
+  handleChange(e) {
+    this.isDisabledForChange = !e.checked;
+}
 }
