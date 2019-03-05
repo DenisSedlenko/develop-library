@@ -1,4 +1,14 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { 
+  Component, 
+  OnInit, 
+  Input, 
+  Output, 
+  EventEmitter, 
+  OnChanges, 
+  SimpleChanges, 
+  ElementRef, 
+  ViewChild 
+} from '@angular/core';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import BookModel from '../../models/book.model';
 import { MessageService } from 'primeng/api';
@@ -19,9 +29,15 @@ export class EditBookComponent implements OnInit, OnChanges {
   @Output() onCompletedAddBook: EventEmitter<BookModel> = new EventEmitter<BookModel>(); 
   @Output() onCompletedChangeBook = new EventEmitter(); 
 
-  book: BookModel; 
+  book: BookModel;
+  heightOverlay: number;
+  widthOverlay: number;
+
   bookform: FormGroup;
   isbnFilter: RegExp = /^[0-9]{1}[-]{1}[0-9]{3}[-]{1}[0-9]{5}[-]{1}[0-9]{0,1}$/
+
+  @ViewChild('uploadImage') 
+  uploadImage: ElementRef;
 
   constructor(
     private fb: FormBuilder, 
@@ -37,7 +53,7 @@ export class EditBookComponent implements OnInit, OnChanges {
         'note': new FormControl(''),
         'comment': new FormControl('')
     });
-    }
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.isDisabled) {
@@ -48,19 +64,22 @@ export class EditBookComponent implements OnInit, OnChanges {
         this.bookform.enable();
       }
     }
-
-    if (changes.editableBook) {
-      this.book = changes.editableBook.currentValue;
-    }
   }
 
   ngOnInit() {
-      this.book = this.editableBook || new BookModel();
-      this.header = this.header;
+    this.book = this.editableBook || new BookModel();
   }
 
   onUploadImage(event) {
-    this.book.poster = event.currentTarget.value;
+    const image = event.target.files[0];
+    let fr = new FileReader();
+    fr.onload = () => { 
+      this.book.poster = fr.result as string;
+    };
+
+    fr.readAsDataURL(image);
+
+    this.uploadImage.nativeElement.value = '';
   }
 
   handleRate(event) {
@@ -68,12 +87,15 @@ export class EditBookComponent implements OnInit, OnChanges {
   }
 
   onSubmit() {
-    if (this.isCreation) {
-      this.book.id = btoa(this.book.label);
+    this.book.id = this.book.id || btoa(encodeURIComponent(this.book.label).replace(/%([0-9A-F]{2})/g, 
+      (match, p1) => String.fromCharCode(parseInt(p1, 16))));
+
+    if (this.isCreation) { 
       this.onCompletedAddBook.emit(this.book);
+    } else {
+      this.onCompletedChangeBook.emit(this.book);
     }
 
-    this.onCompletedChangeBook.emit(this.book);
-    this.messageService.add({severity:'success', summary:'Success', detail: this.message});
+    this.messageService.add({severity:'success', summary:'Успешно', detail: this.message});
   }
 }

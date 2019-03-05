@@ -1,5 +1,14 @@
-.m-grid {
-  margin: 20px;
+.flex-container {
+  margin: auto;
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  width: 90%;
+}
+
+.flex-container .flex-card {
+  width: 300px;
+  margin: 1em;
 }
 
 .add-book-button {
@@ -9,25 +18,27 @@
   padding: 11px;
 }
 
-.poster {
-  height: 400px;
-}
-
 .ctr-img {
   padding: 10px;
 }
 
-.card-wrapper {
+.flex-container .flex-card .card-wrapper {
   position: relative;
   transition: transform .2s ease-in-out; 
 }
 
-.rating-wrapper {
-  padding-left: 10px;
-  padding-top: 10px;
+.flex-container .flex-card .card-wrapper img {
+  height: 350px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.rating-wrapper>.pi {
+
+.flex-container .flex-card .card-wrapper .rating-wrapper {
+  padding-left: 1em;
+  padding-top: 1em;
+}
+
+.flex-container .flex-card .card-wrapper .rating-wrapper>.pi {
   color: rgb(250, 235, 98);
   font-size: 1.5em;
 }
@@ -62,6 +73,12 @@
   background-color: rgba(0,0,0,0.5);
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out
+}
+
+:host ::ng-deep .ui-card-title {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-bottom: 1em;
 }
 
 .card-wrapper:hover {

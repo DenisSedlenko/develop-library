@@ -3,6 +3,7 @@ import BookModel from '../../models/book.model';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ModelDataService } from 'src/app/services/model-data.service';
+import { BreadcrumbService } from 'src/app/services/breadcrumb.service';
 
 @Component({
   selector: 'app-book-board',
@@ -12,16 +13,20 @@ import { ModelDataService } from 'src/app/services/model-data.service';
 export class BookBoardComponent implements OnInit, OnDestroy {
 
   bookList: Array<BookModel>;
+
   librarySubscription: Subscription;
 
   constructor(
     private router: Router,
-    private modelDataService: ModelDataService) { }
+    private modelDataService: ModelDataService,
+    private breadcrumbService: BreadcrumbService) { }
 
   ngOnInit() {
     this.librarySubscription = this.modelDataService.librarySubject$.subscribe( books => {
       this.bookList = books;
     });
+
+    this.breadcrumbService.clearBreadcrumb();
   }
 
   ngOnDestroy() {

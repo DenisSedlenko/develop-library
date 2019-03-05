@@ -1,25 +1,23 @@
 <p-toast [style]="{marginTop: '80px'}"></p-toast>
 <div class="edit-container">
-  <div class="p-grid">
     <div class="p-col-3">
       <div class="poster-wrapper">
         <div *ngIf="book.poster; else emptyPoster">
             <div class="cur-poster">
                 <img class="poster" src="{{book.poster}}">
-                <label for="fileToUpload"><i class="pi pi-plus-circle"></i></label> 
-                <input (change)="onUploadImage($event)" id="fileToUpload" type="file" style="display:none;">
-                <div class="overlay"></div>
+                <label *ngIf="!isDisabled" for="fileToUpload"><i class="pi pi-plus-circle icon"></i></label> 
+                <input #uploadImage (change)="onUploadImage($event)" id="fileToUpload" type="file" style="display:none;">
             </div> 
         </div>
         <ng-template #emptyPoster>
           <div class="empty-poster">
             <span>Нет фото</span>
-            <label for="fileToUpload"><i class="pi pi-plus-circle"></i></label>              
-            <input (change)="onUploadImage($event)" id="fileToUpload" type="file" style="display:none;">
+            <label *ngIf="!isDisabled" for="fileToUpload"><i class="pi pi-plus-circle icon"></i></label>              
+            <input #uploadImage (change)="onUploadImage($event)" id="fileToUpload" type="file" style="display:none;">
           </div>
         </ng-template>
         <div class="rating-wrapper">
-          <p-rating [(ngModel)]="book.rating" disabled="{{isDisabled}}" (onRate)="handleRate($event)" [cancel]="false"></p-rating>         
+          <p-rating [(ngModel)]="book.rating" [disabled]="isDisabled" (onRate)="handleRate($event)" [cancel]="false"></p-rating>         
         </div>
       </div>
     </div>
@@ -36,7 +34,8 @@
                             <input pInputText type="text" [(ngModel)]="book.label" formControlName="label" placeholder="Required"/>
                         </div>
                         <div class="ui-grid-col-4">
-                            <p-message severity="error" text="Название книги обязательное поле" *ngIf="!bookform.controls['label'].valid&&bookform.controls['label'].dirty"></p-message>
+                            <p-message severity="error" text="Название книги обязательное поле" 
+                                *ngIf="bookform.controls.label.invalid&&(bookform.controls.label.dirty || bookform.controls.label.touched)"></p-message>
                         </div>
                     </div>
                     <div class="ui-grid-row">
@@ -47,7 +46,8 @@
                             <input pInputText type="text" [(ngModel)]="book.author" formControlName="author" placeholder="Required"/>
                         </div>
                         <div class="ui-grid-col-4">
-                            <p-message severity="error" text="Автор обязательное поле" *ngIf="!bookform.controls['author'].valid&&bookform.controls['author'].dirty"></p-message>
+                            <p-message severity="error" text="Автор обязательное поле" 
+                                *ngIf="bookform.controls.author.invalid&&(bookform.controls.author.dirty || bookform.controls.author.touched)"></p-message>
                         </div>
                     </div>
                     <div class="ui-grid-row">
@@ -59,7 +59,7 @@
                         </div>
                         <div class="ui-grid-col-4">
                             <p-message severity="error" text="Описание обязательное поле" 
-                            *ngIf="!bookform.controls['description'].valid&&bookform.controls['description'].dirty"></p-message>
+                            *ngIf="bookform.controls.description.invalid&&(bookform.controls.description.dirty || bookform.controls.description.touched)"></p-message>
                         </div>
                     </div>
                     <div class="ui-grid-row">
@@ -71,7 +71,7 @@
                         </div>
                         <div class="ui-grid-col-4">
                         <p-message severity="error" text="Издательство обязательное поле" 
-                                *ngIf="!bookform.controls['publishing'].valid&&bookform.controls['publishing'].dirty"></p-message>
+                                *ngIf="bookform.controls.publishing.invalid&&(bookform.controls.publishing.dirty || bookform.controls.publishing.touched)"></p-message>
                         </div>
                     </div>
                     <div class="ui-grid-row">
@@ -82,8 +82,8 @@
                             <p-inputMask mask="9-999-99999-9" [(ngModel)]="book.isbn" formControlName="isbn" placeholder="Required"></p-inputMask>
                         </div>
                         <div class="ui-grid-col-4">
-                            <p-message severity="error" text="Код ISBN обязательное поле" 
-                            *ngIf="!bookform.controls['isbn'].valid&&bookform.controls['isbn'].dirty"></p-message>
+                            <p-message severity="error" text="Код ISBN обязательное поле"
+                            *ngIf="bookform.controls.isbn.invalid&&(bookform.controls.isbn.dirty || bookform.controls.isbn.touched)"></p-message>
                         </div>
                     </div>
                     <div class="ui-grid-row">
@@ -95,7 +95,7 @@
                         </div>
                         <div class="ui-grid-col-4">
                             <p-message severity="error" text="Год издания обязательное поле" 
-                            *ngIf="!bookform.controls['datePublishing'].valid&&bookform.controls['datePublishing'].dirty"></p-message>
+                            *ngIf="bookform.controls.datePublishing.invalid&&(bookform.controls.datePublishing.dirty || bookform.controls.datePublishing.touched)"></p-message>
                         </div>
                     </div>
                     <div class="ui-grid-row">
@@ -137,5 +137,4 @@
         </form>
       </div>
     </div>
-  </div>
 </div> 

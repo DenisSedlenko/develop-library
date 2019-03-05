@@ -2,16 +2,33 @@
   padding-top: 0;
 }
 
+.flex-container .flex-card .card-wrapper .ui-card {
+  height: 500px;
+}
+
 .empty-poster {
   width: 100%;
-  height: 400px;
+  height: 350px;
   position: relative;
   background: #fff;
-  color: #000;
+  color: rgba(0, 0, 0, 0.1);
   text-transform: uppercase;
   font-size: 2em;
   text-align: center;
-  border: 1px solid rgba(0,0,0,0.5);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.edit-container .poster-wrapper .pi.icon {
+  display: none;
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: rgba(0, 0, 0, 0.4);
+  font-size: 7em; 
+  text-align: center;
+  margin-top: -0.5em;
+  margin-left: -0.5em;
 }
 
 .empty-poster>span {

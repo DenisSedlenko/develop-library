@@ -21,13 +21,12 @@ export class NewBookComponent implements OnInit {
     private modelDataService: ModelDataService) { }
 
   ngOnInit() {
-    this.breadcrumbService.pushItemBreadcrumb({label: 'Добавить книгу', url: 'book'})
+    this.breadcrumbService.pushItemBreadcrumb({label: 'Добавить книгу', routerLink: '/book'})
   }
 
   onCompletedAddBook(book: BookModel) {
     this.modelDataService.addNewBook(book);
     setTimeout(() => {
-      this.breadcrumbService.removeLastItemBreadcrumb();
       this.router.navigate(['/board']);
     }, 1000);
   }

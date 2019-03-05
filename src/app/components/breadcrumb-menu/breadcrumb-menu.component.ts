@@ -17,7 +17,8 @@ export class BreadcrumbMenuComponent implements OnInit, OnDestroy {
   itemSubscription: Subscription;
 
   ngOnInit() {
-    this.home = {label: 'Main', icon: 'pi pi-home', url: 'board'};
+    this.home = {label: 'Main', icon: 'pi pi-home', routerLink: '/board'};
+    
     this.itemSubscription = this.breadcrumbService.itemsSubject$.subscribe((items) => {
       this.items = items.length ? items : undefined;
     });

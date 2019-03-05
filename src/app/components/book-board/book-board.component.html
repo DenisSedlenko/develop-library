@@ -1,6 +1,6 @@
 <p-button (click)="onClickAddBook()" class="add-book-button" icon="pi pi-plus" iconPos="left" label="Добавить книгу"></p-button>
-<div class="p-grid m-grid">
-  <div *ngFor="let book of bookList" class="p-col-3">
+<div class="flex-container">
+  <div *ngFor="let book of bookList" class="flex-card">
     <div class="card-wrapper">
       <p-card header="{{book.label}}" styleClass="ui-card-shadow">
         <p-header>

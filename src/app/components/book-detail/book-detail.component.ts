@@ -20,7 +20,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
   private activeRouteSubscription: Subscription;
   private booksSubscription: Subscription;
 
-  isEditMode;
+  isEditMode: boolean;
   labelButton: string = 'Сохранить изменения';
   headerPanel: string = 'Информация о книге';
   messageOnSuccessChange: string = 'Книга успешно изменена';
@@ -37,8 +37,8 @@ export class BookDetailComponent implements OnInit, OnDestroy {
 
     this.booksSubscription = this.modelDataService.librarySubject$.subscribe( books => {
       this.bookList = books;
-      this.detailBook = { ...this.bookList.find(book => book.id === this.id) };
-      this.breadcrumbService.pushItemBreadcrumb({ label: this.detailBook.label, url: `detail/${this.id}`});
+      this.detailBook = this.bookList.find(book => book.id === this.id);
+      this.breadcrumbService.pushItemBreadcrumb({ label: this.detailBook.label, routerLink: `/detail/${this.id}`});
     })
   }
 
@@ -47,12 +47,13 @@ export class BookDetailComponent implements OnInit, OnDestroy {
     this.booksSubscription.unsubscribe();
   }
 
-  onCompletedChangeBook(book) {
+  onCompletedChangeBook(book: BookModel) {
     this.modelDataService.updateBook(book);
     this.isDisabledForChange = true;
+    this.isEditMode = !this.isDisabledForChange;
   }
 
   handleChange(e) {
     this.isDisabledForChange = !e.checked;
-}
+  }
 }

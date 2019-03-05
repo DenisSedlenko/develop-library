@@ -7,22 +7,19 @@ import { MenuItem } from 'primeng/api';
 })
 export class BreadcrumbService {
 
-  private items: MenuItem[] = [];
+  private items: Array<MenuItem> = new Array<MenuItem>();
   itemsSubject$: BehaviorSubject<Array<MenuItem>> = new BehaviorSubject<Array<MenuItem>>(this.items);
   
   constructor() {}
 
   pushItemBreadcrumb(item: MenuItem) {
-    if (this.items.length && this.items[this.items.length - 1].label === item.label) {
-      return;
-    }
-
+    this.items.pop();
     this.items.push(item);
     this.itemsSubject$.next(this.items);
   }
 
-  removeLastItemBreadcrumb() {
-    this.items.pop();
+  clearBreadcrumb() {
+    this.items = new Array<MenuItem>();
     this.itemsSubject$.next(this.items);
   }
 }
