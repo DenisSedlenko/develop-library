@@ -30,8 +30,6 @@ export class EditBookComponent implements OnInit, OnChanges {
   @Output() onCompletedChangeBook = new EventEmitter(); 
 
   book: BookModel;
-  heightOverlay: number;
-  widthOverlay: number;
 
   bookform: FormGroup;
   isbnFilter: RegExp = /^[0-9]{1}[-]{1}[0-9]{3}[-]{1}[0-9]{5}[-]{1}[0-9]{0,1}$/

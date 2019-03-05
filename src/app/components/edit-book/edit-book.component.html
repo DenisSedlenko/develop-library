@@ -1,11 +1,13 @@
 <p-toast [style]="{marginTop: '80px'}"></p-toast>
 <div class="edit-container">
-    <div class="p-col-3">
+    <div class="poster-column">
       <div class="poster-wrapper">
         <div *ngIf="book.poster; else emptyPoster">
             <div class="cur-poster">
                 <img class="poster" src="{{book.poster}}">
-                <label *ngIf="!isDisabled" for="fileToUpload"><i class="pi pi-plus-circle icon"></i></label> 
+                <label *ngIf="!isDisabled" for="fileToUpload">
+                    <a class="change-image">Изменить</a>
+                </label> 
                 <input #uploadImage (change)="onUploadImage($event)" id="fileToUpload" type="file" style="display:none;">
             </div> 
         </div>
@@ -21,7 +23,7 @@
         </div>
       </div>
     </div>
-    <div class="p-col-9">
+    <div class="edit-column">
       <div class="edit-wrapper">
         <form [formGroup]="bookform" (ngSubmit)="onSubmit(bookform.value)">
             <p-panel header="{{header}}">

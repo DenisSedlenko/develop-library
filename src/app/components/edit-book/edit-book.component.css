@@ -1,29 +1,40 @@
 .edit-container {
-  margin: auto;
-  width: 70%;
   margin-top: 2em;
   display: flex;
 }
 
-.edit-container .poster-wrapper .poster {
+.edit-container .poster-column {
+  width: 25%;
+}
+
+.edit-container .edit-column {
+  width: 75%;
+}
+
+.edit-container .poster-column .poster-wrapper {
+  width: 250px;
+  margin: auto;
+}
+
+.edit-container .poster-column .poster-wrapper .poster {
   width: 100%;
   height: 100%;
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.edit-container .poster-wrapper .poster:hover {
+.edit-container .poster-column .poster-wrapper .poster:hover {
   background-color: white;
 }
 
-.edit-container .poster-wrapper .empty-poster:hover {
-  background-color: rgba(0,0,0,0.5);
+.edit-container .poster-column .poster-wrapper .empty-poster:hover {
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.edit-container .poster-wrapper .cur-poster {
+.edit-container .poster-column .poster-wrapper .cur-poster {
   position: relative;
 }
 
-.edit-container .poster-wrapper .cur-poster .overlay {
+.edit-container .poster-column .poster-wrapper .cur-poster .overlay {
   position: absolute;
   top: 0;
   width: 300px;
@@ -33,16 +44,74 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.edit-container .poster-wrapper .cur-poster:hover .overlay {
+.edit-container .poster-column .poster-wrapper .cur-poster:hover .overlay {
   display: block;
 }
 
-.edit-container .poster-wrapper .empty-poster:hover .pi,
-.edit-container .poster-wrapper .cur-poster:hover .pi{
+.edit-container .poster-column .poster-wrapper .empty-poster:hover .pi,
+.edit-container .poster-column .poster-wrapper .cur-poster:hover .pi{
   display: block;
 }
 
-.edit-container .rating-wrapper {
+.edit-container .poster-column .poster-wrapper .rating-wrapper {
   padding-top: 1em;
+  margin-bottom: 2em;
   text-align: center;
+}
+
+.edit-container .poster-column .poster-wrapper .cur-poster .change-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #fff;
+  border-radius: 10px;
+  color: #fff;
+  text-transform: uppercase;
+  margin-top: -0.625em;
+}
+
+.edit-container .poster-column .poster-wrapper .cur-poster:hover .change-image {
+  display: block;
+  border-color: rgb(16, 28, 133);
+  color: rgb(16, 28, 133);
+}
+
+@media (max-width: 1500px) { 
+  .edit-container .poster-column .poster-wrapper {
+    width: 200px;
+  } 
+}
+
+@media (max-width: 1200px) { 
+  .edit-container .poster-column .poster-wrapper {
+    width: 150px;
+  } 
+}
+
+@media (max-width: 700px) { 
+  .edit-container {
+    flex-direction: column;
+  }
+
+  .edit-container .poster-column {
+    width: 100%;
+  }
+
+  .edit-container .poster-column .poster-wrapper {
+    width: 300px;
+  }
+  
+  .edit-container .edit-column {
+    width: 100%;
+  }
+}
+
+@media (max-width: 470px) { 
+  .edit-container .poster-column .poster-wrapper {
+    width: 250px;
+  }
 }

@@ -1,8 +1,9 @@
-<div style="position: relative;">
-  <div class="p-grid switch-editing">
-      <div class="p-col-8"></div>
+<div class="form-container">
+  <div class="switch-editing">
+    <div>
       <span>Режим редактирования:</span>
       <p-inputSwitch (onChange)="handleChange($event)" [(ngModel)]="isEditMode"></p-inputSwitch>
+    </div>
   </div>
 
   <app-edit-book
